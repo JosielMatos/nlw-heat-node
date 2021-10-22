@@ -5,6 +5,7 @@ class AuthenticateUserService {
     //get access token
     const url = "https://github.com/login/oauth/access_token"
 
+    //use axios to do a post req with the credentials
     const response = axios.post(url, null, {
         params: {
             client_id: process.env.GITHUB_CLIENT_ID,
@@ -16,6 +17,7 @@ class AuthenticateUserService {
         }
     })
 
+    //return axios response
     return (await response).data
   }
 }

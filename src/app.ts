@@ -12,7 +12,7 @@ app.get("/github", (req, res) => {
   );
 });
 
-//after auth callback route
+//github auth callback route
 app.get("/signin/callback", (req, res) => {
     const { code } = req.query;
     return res.json(code);
