@@ -1,9 +1,10 @@
 import "dotenv/config";
 import express from "express";
+import { router } from "./routes";
 
 const app = express();
 
-const PORT = process.env.PORT || 2121;
+app.use(router);
 
 //github auth route
 app.get("/github", (req, res) => {
@@ -14,8 +15,10 @@ app.get("/github", (req, res) => {
 
 //github auth callback route
 app.get("/signin/callback", (req, res) => {
-    const { code } = req.query;
-    return res.json(code);
-})
+  const { code } = req.query;
+  return res.json(code);
+});
+
+const PORT = process.env.PORT || 2121;
 
 app.listen(PORT, () => `Server running on ${PORT}`);
