@@ -3,6 +3,7 @@ import { AuthenticateUserController } from "./controllers/AuthenticateUserContro
 
 const router = Router();
 
-router.post("/authenticate", new AuthenticateUserController().handle)
+//Post auth route with user credentials
+router.post("/auth", new AuthenticateUserController().handle)
 
 export { router };
