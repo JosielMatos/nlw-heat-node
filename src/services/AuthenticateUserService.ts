@@ -1,5 +1,6 @@
 import axios from "axios";
-import prismaClient from "../prisma"
+import prismaClient from "../prisma";
+import { sign } from "jsonwebtoken";
 
 //set interface to get only the access token from github's response
 interface IAccessTokenResponse {
@@ -63,8 +64,21 @@ class AuthenticateUserService {
       })
     }
 
-    //return axios response
-    return response.data;
+    //generate token
+    const token = sign({
+      user: {
+        name: user.name,
+        avatar_url: user.avatar_url,
+        id: user.id,
+      }
+    },
+    process.env.JWT_SECRET,
+    {
+      subject: user.id,
+      expiresIn: "1d"
+    })
+
+    return { token, user };
   }
 }
 
