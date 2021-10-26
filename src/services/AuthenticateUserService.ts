@@ -1,4 +1,5 @@
 import axios from "axios";
+import prismaClient from "../prisma"
 
 //set interface to get only the access token from github's response
 interface IAccessTokenResponse {
@@ -40,6 +41,27 @@ class AuthenticateUserService {
         },
       }
     );
+
+    const { login, avatar_url, name, id } = response.data;
+
+    //find user in db
+    let user = await prismaClient.user.findFirst({
+      where: {
+        github_id: id,
+      }
+    })
+
+    //if user doensn't exist, create one
+    if (!user) {
+      user = await prismaClient.user.create({
+        data: {
+          github_id: id,
+          login,
+          avatar_url,
+          name
+        }
+      })
+    }
 
     //return axios response
     return response.data;
