@@ -22,4 +22,4 @@ app.get("/signin/callback", (req, res) => {
 
 const PORT = process.env.PORT || 2121;
 
-app.listen(PORT, () => `Server running on ${PORT}`);
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
