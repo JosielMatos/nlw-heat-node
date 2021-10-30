@@ -8,11 +8,11 @@ import { ensureAuth } from "./middlewares/ensureAuth";
 const router = Router();
 
 //post routes
-router.post("/auth", new AuthenticateUserController().handle)
-router.post("/messages", ensureAuth, new CreateMessageController().handle)
+router.post("/auth", AuthenticateUserController);
+router.post("/messages", ensureAuth, CreateMessageController);
 
 //get routes
-router.get("/messages/last3", new GetLast3MessagesController().execute)
-router.get("/profile", ensureAuth, new UserProfileController().handle)
+router.get("/messages/last3", GetLast3MessagesController);
+router.get("/profile", ensureAuth, UserProfileController);
 
 export { router };

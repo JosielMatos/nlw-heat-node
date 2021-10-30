@@ -1,16 +1,12 @@
 import { Request, Response } from "express";
 import { UserProfileService } from "../services/UserProfileService";
 
-class UserProfileController {
-  async handle(req: Request, res: Response) {
-    const { user_id } = req;
+const UserProfileController = async (req: Request, res: Response) => {
+  const { user_id } = req;
 
-    const service = new UserProfileService();
+  const result = await UserProfileService(user_id);
 
-    const result = await service.handle(user_id);
-
-    return res.json(result);
-  }
-}
+  return res.json(result);
+};
 
 export { UserProfileController };

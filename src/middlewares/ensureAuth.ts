@@ -6,7 +6,7 @@ interface IPayload {
   sub: string;
 }
 
-export function ensureAuth(req: Request, res: Response, next: NextFunction) {
+const ensureAuth = (req: Request, res: Response, next: NextFunction) => {
   //get token from the headers
   const authToken = req.headers.authorization;
 
@@ -27,4 +27,6 @@ export function ensureAuth(req: Request, res: Response, next: NextFunction) {
   } catch (error) {
     return res.status(401).json({ Error: error.message });
   }
-}
+};
+
+export { ensureAuth };

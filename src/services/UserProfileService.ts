@@ -1,15 +1,13 @@
 import prismaClient from "../prisma";
 
-class UserProfileService {
-  async handle(user_id: string) {
-    const user = await prismaClient.user.findFirst({
-      where: {
-        id: user_id,
-      },
-    });
+const UserProfileService = async (user_id: string) => {
+  const user = await prismaClient.user.findFirst({
+    where: {
+      id: user_id,
+    },
+  });
 
-    return user;
-  }
-}
+  return user;
+};
 
 export { UserProfileService };
